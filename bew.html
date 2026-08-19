@@ -1,0 +1,2453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1">
+
+<title>SADEE MEDIA</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#080808;
+  color:#fff;
+  font-family:Arial,sans-serif;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  height:64px;
+  padding:0 16px;
+  background:#111;
+  border-bottom:1px solid #292929;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  color:#ff3030;
+  font-weight:900;
+  font-size:20px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:18px;
+}
+
+.card{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:16px;
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 15px;
+  background:#e52323;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.secondary{
+  background:#292929;
+}
+
+.danger{
+  background:#8c1111;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:12px;
+  margin:7px 0 12px;
+  background:#080808;
+  color:#fff;
+  border:1px solid #333;
+  border-radius:10px;
+  outline:none;
+}
+
+input:focus,
+textarea:focus{
+  border-color:#e52323;
+}
+
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin-bottom:18px;
+}
+
+.tab{
+  background:#1d1d1d;
+  white-space:nowrap;
+}
+
+.tab.active{
+  background:#e52323;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+}
+
+.media{
+  padding:0;
+  overflow:hidden;
+}
+
+.media img,
+.media video{
+  width:100%;
+  max-height:500px;
+  object-fit:cover;
+  display:block;
+  background:#000;
+}
+
+.media-body{
+  padding:14px;
+}
+
+.message{
+  background:#151515;
+  border-left:3px solid #e52323;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:12px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.center{
+  text-align:center;
+}
+
+.small{
+  font-size:13px;
+  color:#999;
+}
+
+.status{
+  margin-top:10px;
+  font-size:14px;
+  min-height:20px;
+  line-height:1.5;
+}
+
+.success{
+  color:#4ee27b;
+}
+
+.error{
+  color:#ff6060;
+}
+
+.empty{
+  text-align:center;
+  color:#888;
+  padding:25px;
+}
+
+.admin-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid #292929;
+}
+
+.admin-item:last-child{
+  border-bottom:0;
+}
+
+.file-info{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:12px;
+  font-size:13px;
+  color:#aaa;
+}
+
+.progress{
+  width:100%;
+  height:8px;
+  background:#292929;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:#e52323;
+  transition:width .2s;
+}
+
+@media(max-width:600px){
+
+  .container{
+    padding:14px;
+  }
+
+  .card{
+    padding:16px;
+  }
+
+  .logo{
+    font-size:18px;
+  }
+
+  .admin-item{
+    align-items:flex-start;
+  }
+
+  .admin-item button{
+    flex-shrink:0;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    SADEE MEDIA
+  </div>
+
+  <div>
+
+    <button
+      id="adminBtn"
+      class="secondary"
+      onclick="openAdmin()">
+      ADMIN
+    </button>
+
+    <button
+      id="logoutBtn"
+      class="secondary hidden"
+      onclick="logout()">
+      LOGOUT
+    </button>
+
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     USER APP
+===================================================== -->
+
+<section id="userApp">
+
+  <div class="tabs">
+
+    <button
+      class="tab active"
+      onclick="userTab('home',this)">
+      Home
+    </button>
+
+    <button
+      class="tab"
+      onclick="userTab('photos',this)">
+      Photos
+    </button>
+
+    <button
+      class="tab"
+      onclick="userTab('videos',this)">
+      Videos
+    </button>
+
+    <button
+      class="tab"
+      onclick="userTab('messages',this)">
+      Messages
+    </button>
+
+  </div>
+
+
+  <!-- HOME -->
+
+  <div id="homeTab">
+
+    <div class="card">
+
+      <h1>SADEE MEDIA</h1>
+
+      <p class="small">
+        Photos • Videos • Messages
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>Latest</h2>
+
+      <div
+        id="latest"
+        class="grid">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PHOTOS -->
+
+  <div
+    id="photosTab"
+    class="hidden">
+
+    <div class="card">
+
+      <h2>Photos</h2>
+
+      <div
+        id="photos"
+        class="grid">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- VIDEOS -->
+
+  <div
+    id="videosTab"
+    class="hidden">
+
+    <div class="card">
+
+      <h2>Videos</h2>
+
+      <div
+        id="videos"
+        class="grid">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MESSAGES -->
+
+  <div
+    id="messagesTab"
+    class="hidden">
+
+    <div class="card">
+
+      <h2>Messages</h2>
+
+      <div id="messages"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN LOGIN
+===================================================== -->
+
+<section
+  id="loginApp"
+  class="hidden">
+
+  <div
+    class="card center"
+    style="max-width:430px;margin:70px auto">
+
+    <h2>ADMIN LOGIN</h2>
+
+    <p class="small">
+      Enter your admin password
+    </p>
+
+    <input
+      id="adminPassword"
+      type="password"
+      placeholder="Admin password"
+      autocomplete="current-password"
+      onkeydown="
+        if(event.key==='Enter') login()
+      ">
+
+    <button
+      id="loginButton"
+      style="width:100%"
+      onclick="login()">
+      LOGIN
+    </button>
+
+    <div
+      id="loginStatus"
+      class="status">
+    </div>
+
+    <br>
+
+    <button
+      class="secondary"
+      onclick="backHome()">
+      BACK
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN APP
+===================================================== -->
+
+<section
+  id="adminApp"
+  class="hidden">
+
+  <div class="tabs">
+
+    <button
+      class="tab active"
+      onclick="adminTab('dashboard',this)">
+      Dashboard
+    </button>
+
+    <button
+      class="tab"
+      onclick="adminTab('upload',this)">
+      Upload
+    </button>
+
+    <button
+      class="tab"
+      onclick="adminTab('message',this)">
+      Message
+    </button>
+
+    <button
+      class="tab"
+      onclick="adminTab('manage',this)">
+      Manage
+    </button>
+
+  </div>
+
+
+  <!-- =================================================
+       DASHBOARD
+  ================================================== -->
+
+  <div id="dashboardTab">
+
+    <div class="card">
+
+      <h2>
+        Admin Dashboard
+      </h2>
+
+      <p class="small">
+        Manage photos, videos and messages.
+      </p>
+
+    </div>
+
+
+    <div class="grid">
+
+      <div class="card center">
+
+        <h2 id="photoCount">
+          0
+        </h2>
+
+        <p>
+          Photos
+        </p>
+
+      </div>
+
+
+      <div class="card center">
+
+        <h2 id="videoCount">
+          0
+        </h2>
+
+        <p>
+          Videos
+        </p>
+
+      </div>
+
+
+      <div class="card center">
+
+        <h2 id="messageCount">
+          0
+        </h2>
+
+        <p>
+          Messages
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =================================================
+       UPLOAD
+  ================================================== -->
+
+  <div
+    id="uploadTab"
+    class="hidden">
+
+    <div class="card">
+
+      <h2>
+        Upload Photo / Video
+      </h2>
+
+
+      <input
+        id="mediaTitle"
+        placeholder="Title">
+
+
+      <input
+        id="mediaFile"
+        type="file"
+        accept="image/*,video/*"
+        onchange="showFileInfo()">
+
+
+      <div
+        id="fileInfo"
+        class="file-info hidden">
+      </div>
+
+
+      <button
+        id="uploadButton"
+        onclick="uploadMedia()">
+        UPLOAD & PUBLISH
+      </button>
+
+
+      <div
+        class="progress hidden"
+        id="uploadProgress">
+
+        <div
+          class="progress-bar"
+          id="uploadProgressBar">
+        </div>
+
+      </div>
+
+
+      <div
+        id="uploadStatus"
+        class="status">
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =================================================
+       MESSAGE
+  ================================================== -->
+
+  <div
+    id="messageTab"
+    class="hidden">
+
+    <div class="card">
+
+      <h2>
+        Publish Message
+      </h2>
+
+
+      <input
+        id="messageTitle"
+        placeholder="Message title">
+
+
+      <textarea
+        id="messageText"
+        placeholder="Write message..."></textarea>
+
+
+      <button
+        id="messageButton"
+        onclick="publishMessage()">
+        PUBLISH MESSAGE
+      </button>
+
+
+      <div
+        id="messageStatus"
+        class="status">
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =================================================
+       MANAGE
+  ================================================== -->
+
+  <div
+    id="manageTab"
+    class="hidden">
+
+    <div class="card">
+
+      <h2>
+        Manage Posts
+      </h2>
+
+      <div id="manageList"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
+
+import {
+  initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  serverTimestamp,
+  query,
+  orderBy
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+/* =====================================================
+   ADMIN EMAIL
+===================================================== */
+
+const ADMIN_EMAIL =
+  "sadewpehesara50@gmail.com";
+
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyDwl6G22Wz6snAMGnPHG6UG80iFrQzsTY0",
+
+  authDomain:
+    "sadee-media.firebaseapp.com",
+
+  projectId:
+    "sadee-media",
+
+  storageBucket:
+    "sadee-media.firebasestorage.app",
+
+  messagingSenderId:
+    "105517516553",
+
+  appId:
+    "1:105517516553:web:c270464ef8d1996cfb75d8"
+
+};
+
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+
+const auth =
+  getAuth(app);
+
+
+const db =
+  getFirestore(app);
+
+
+
+/* =====================================================
+   CLOUDINARY
+===================================================== */
+
+const CLOUD_NAME =
+  "rxfhe75n";
+
+const UPLOAD_PRESET =
+  "media_upload";
+
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+onAuthStateChanged(
+  auth,
+  user => {
+
+    if(user){
+
+      if(
+        user.email?.toLowerCase() !==
+        ADMIN_EMAIL.toLowerCase()
+      ){
+
+        signOut(auth);
+
+        return;
+
+      }
+
+
+      document
+        .getElementById("userApp")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("loginApp")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("adminApp")
+        .classList.remove("hidden");
+
+
+      document
+        .getElementById("adminBtn")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("logoutBtn")
+        .classList.remove("hidden");
+
+
+      loadAdmin();
+
+    }
+    else{
+
+      document
+        .getElementById("adminApp")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("logoutBtn")
+        .classList.add("hidden");
+
+
+      document
+        .getElementById("adminBtn")
+        .classList.remove("hidden");
+
+    }
+
+  }
+);
+
+
+
+/* =====================================================
+   USER TABS
+===================================================== */
+
+window.userTab =
+(name,btn) => {
+
+  document
+    .querySelectorAll(
+      "#userApp .tab"
+    )
+    .forEach(
+      x =>
+        x.classList.remove("active")
+    );
+
+
+  btn.classList.add("active");
+
+
+  [
+    "home",
+    "photos",
+    "videos",
+    "messages"
+  ]
+  .forEach(
+    x => {
+
+      document
+        .getElementById(
+          x + "Tab"
+        )
+        .classList.add("hidden");
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      name + "Tab"
+    )
+    .classList.remove("hidden");
+
+};
+
+
+
+/* =====================================================
+   OPEN ADMIN
+===================================================== */
+
+window.openAdmin =
+() => {
+
+  document
+    .getElementById("userApp")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("adminApp")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("loginApp")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("adminPassword")
+    .value = "";
+
+
+  document
+    .getElementById("loginStatus")
+    .textContent = "";
+
+};
+
+
+
+/* =====================================================
+   BACK HOME
+===================================================== */
+
+window.backHome =
+() => {
+
+  document
+    .getElementById("loginApp")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("userApp")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("adminPassword")
+    .value = "";
+
+
+  document
+    .getElementById("loginStatus")
+    .textContent = "";
+
+};
+
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+window.login =
+async () => {
+
+  const password =
+    document
+      .getElementById("adminPassword")
+      .value
+      .trim();
+
+
+  const status =
+    document
+      .getElementById("loginStatus");
+
+
+  const button =
+    document
+      .getElementById("loginButton");
+
+
+  if(!password){
+
+    status.textContent =
+      "Enter admin password.";
+
+    status.className =
+      "status error";
+
+    return;
+
+  }
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "LOGGING IN...";
+
+
+  status.textContent =
+    "Checking password...";
+
+  status.className =
+    "status";
+
+
+  try{
+
+    const credential =
+      await signInWithEmailAndPassword(
+        auth,
+        ADMIN_EMAIL,
+        password
+      );
+
+
+    if(
+      credential.user.email?.toLowerCase() !==
+      ADMIN_EMAIL.toLowerCase()
+    ){
+
+      await signOut(auth);
+
+      throw new Error(
+        "This account is not the admin account."
+      );
+
+    }
+
+
+    status.textContent =
+      "Login successful.";
+
+    status.className =
+      "status success";
+
+
+    document
+      .getElementById("adminPassword")
+      .value = "";
+
+  }
+  catch(error){
+
+    console.error(
+      "LOGIN ERROR:",
+      error
+    );
+
+
+    let message =
+      "Login failed.";
+
+
+    if(
+      error.code ===
+      "auth/invalid-credential"
+    ){
+
+      message =
+        "Wrong admin password.";
+
+    }
+    else if(
+      error.code ===
+      "auth/too-many-requests"
+    ){
+
+      message =
+        "Too many attempts. Try again later.";
+
+    }
+    else if(
+      error.code ===
+      "auth/network-request-failed"
+    ){
+
+      message =
+        "Network error.";
+
+    }
+    else if(error.message){
+
+      message =
+        error.message;
+
+    }
+
+
+    status.textContent =
+      message;
+
+    status.className =
+      "status error";
+
+  }
+  finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "LOGIN";
+
+  }
+
+};
+
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+window.logout =
+async () => {
+
+  try{
+
+    await signOut(auth);
+
+    document
+      .getElementById("adminApp")
+      .classList.add("hidden");
+
+
+    document
+      .getElementById("logoutBtn")
+      .classList.add("hidden");
+
+
+    document
+      .getElementById("adminBtn")
+      .classList.remove("hidden");
+
+
+    document
+      .getElementById("userApp")
+      .classList.remove("hidden");
+
+  }
+  catch(error){
+
+    console.error(error);
+
+  }
+
+};
+
+
+
+/* =====================================================
+   ADMIN TABS
+===================================================== */
+
+window.adminTab =
+(name,btn) => {
+
+  document
+    .querySelectorAll(
+      "#adminApp .tab"
+    )
+    .forEach(
+      x =>
+        x.classList.remove("active")
+    );
+
+
+  btn.classList.add("active");
+
+
+  [
+    "dashboardTab",
+    "uploadTab",
+    "messageTab",
+    "manageTab"
+  ]
+  .forEach(
+    id => {
+
+      document
+        .getElementById(id)
+        .classList.add("hidden");
+
+    }
+  );
+
+
+  document
+    .getElementById(
+      name + "Tab"
+    )
+    .classList.remove("hidden");
+
+};
+
+
+
+/* =====================================================
+   FILE INFO
+===================================================== */
+
+window.showFileInfo =
+() => {
+
+  const file =
+    document
+      .getElementById("mediaFile")
+      .files[0];
+
+
+  const box =
+    document
+      .getElementById("fileInfo");
+
+
+  if(!file){
+
+    box.classList.add("hidden");
+
+    box.textContent = "";
+
+    return;
+
+  }
+
+
+  const sizeMB =
+    (
+      file.size /
+      (1024 * 1024)
+    ).toFixed(2);
+
+
+  const type =
+    file.type.startsWith("video/")
+      ? "VIDEO"
+      : "PHOTO";
+
+
+  box.innerHTML =
+
+    `<b>${escapeHTML(file.name)}</b>
+     <br>
+     Type: ${type}
+     <br>
+     Size: ${sizeMB} MB`;
+
+
+  box.classList.remove("hidden");
+
+};
+
+
+
+/* =====================================================
+   CLOUDINARY UPLOAD
+   FIXED VERSION
+===================================================== */
+
+async function cloudinaryUpload(file){
+
+  const form =
+    new FormData();
+
+
+  form.append(
+    "file",
+    file
+  );
+
+
+  form.append(
+    "upload_preset",
+    UPLOAD_PRESET
+  );
+
+
+  /*
+   * IMPORTANT:
+   *
+   * Photo:
+   * /image/upload
+   *
+   * Video:
+   * /video/upload
+   */
+
+  const resourceType =
+    file.type.startsWith("video/")
+      ? "video"
+      : "image";
+
+
+  const uploadUrl =
+    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`;
+
+
+  const response =
+    await fetch(
+      uploadUrl,
+      {
+        method:"POST",
+        body:form
+      }
+    );
+
+
+  let data = {};
+
+
+  try{
+
+    data =
+      await response.json();
+
+  }
+  catch(error){
+
+    throw new Error(
+      "Cloudinary returned an invalid response."
+    );
+
+  }
+
+
+  if(
+    !response.ok ||
+    data.error
+  ){
+
+    throw new Error(
+      data?.error?.message ||
+      `Cloudinary upload failed (${response.status}).`
+    );
+
+  }
+
+
+  if(!data.secure_url){
+
+    throw new Error(
+      "Cloudinary did not return a media URL."
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+
+/* =====================================================
+   UPLOAD MEDIA
+===================================================== */
+
+window.uploadMedia =
+async () => {
+
+  if(!auth.currentUser){
+
+    alert(
+      "Please login as admin first."
+    );
+
+    return;
+
+  }
+
+
+  const title =
+    document
+      .getElementById("mediaTitle")
+      .value
+      .trim();
+
+
+  const file =
+    document
+      .getElementById("mediaFile")
+      .files[0];
+
+
+  const status =
+    document
+      .getElementById("uploadStatus");
+
+
+  const button =
+    document
+      .getElementById("uploadButton");
+
+
+  const progress =
+    document
+      .getElementById("uploadProgress");
+
+
+  const progressBar =
+    document
+      .getElementById("uploadProgressBar");
+
+
+  if(!file){
+
+    status.textContent =
+      "Select a photo or video.";
+
+    status.className =
+      "status error";
+
+    return;
+
+  }
+
+
+  /*
+   * Detect media type
+   */
+
+  const type =
+    file.type.startsWith("video/")
+      ? "video"
+      : "photo";
+
+
+  try{
+
+    button.disabled = true;
+
+    button.textContent =
+      "UPLOADING...";
+
+
+    progress.classList.remove(
+      "hidden"
+    );
+
+
+    progressBar.style.width =
+      "10%";
+
+
+    status.textContent =
+      `Uploading ${type} to Cloudinary...`;
+
+    status.className =
+      "status";
+
+
+    /*
+     * Upload to Cloudinary
+     */
+
+    progressBar.style.width =
+      "25%";
+
+
+    const result =
+      await cloudinaryUpload(file);
+
+
+    progressBar.style.width =
+      "75%";
+
+
+    /*
+     * Save post to Firestore
+     */
+
+    await addDoc(
+      collection(
+        db,
+        "posts"
+      ),
+      {
+
+        title:
+          title || file.name,
+
+        type:
+          type,
+
+        url:
+          result.secure_url,
+
+        publicId:
+          result.public_id || "",
+
+        createdAt:
+          serverTimestamp(),
+
+        createdBy:
+          auth.currentUser.uid
+
+      }
+    );
+
+
+    progressBar.style.width =
+      "100%";
+
+
+    status.textContent =
+      "Uploaded and published successfully.";
+
+    status.className =
+      "status success";
+
+
+    /*
+     * Clear form
+     */
+
+    document
+      .getElementById("mediaTitle")
+      .value = "";
+
+
+    document
+      .getElementById("mediaFile")
+      .value = "";
+
+
+    document
+      .getElementById("fileInfo")
+      .classList.add("hidden");
+
+
+    await loadUser();
+
+    await loadAdmin();
+
+
+  }
+  catch(error){
+
+    console.error(
+      "UPLOAD ERROR:",
+      error
+    );
+
+
+    /*
+     * Now actual Cloudinary error
+     * will be displayed.
+     */
+
+    status.textContent =
+      error.message ||
+      "Upload failed.";
+
+    status.className =
+      "status error";
+
+
+    progressBar.style.width =
+      "0%";
+
+  }
+  finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "UPLOAD & PUBLISH";
+
+  }
+
+};
+
+
+
+/* =====================================================
+   PUBLISH MESSAGE
+===================================================== */
+
+window.publishMessage =
+async () => {
+
+  if(!auth.currentUser){
+
+    alert(
+      "Please login as admin first."
+    );
+
+    return;
+
+  }
+
+
+  const title =
+    document
+      .getElementById("messageTitle")
+      .value
+      .trim();
+
+
+  const text =
+    document
+      .getElementById("messageText")
+      .value
+      .trim();
+
+
+  const status =
+    document
+      .getElementById("messageStatus");
+
+
+  const button =
+    document
+      .getElementById("messageButton");
+
+
+  if(!text){
+
+    status.textContent =
+      "Write a message.";
+
+    status.className =
+      "status error";
+
+    return;
+
+  }
+
+
+  try{
+
+    button.disabled = true;
+
+    button.textContent =
+      "PUBLISHING...";
+
+
+    await addDoc(
+      collection(
+        db,
+        "messages"
+      ),
+      {
+
+        title:
+          title || "Message",
+
+        text:
+          text,
+
+        createdAt:
+          serverTimestamp(),
+
+        createdBy:
+          auth.currentUser.uid
+
+      }
+    );
+
+
+    status.textContent =
+      "Message published.";
+
+    status.className =
+      "status success";
+
+
+    document
+      .getElementById("messageTitle")
+      .value = "";
+
+
+    document
+      .getElementById("messageText")
+      .value = "";
+
+
+    await loadUser();
+
+    await loadAdmin();
+
+  }
+  catch(error){
+
+    console.error(
+      "MESSAGE ERROR:",
+      error
+    );
+
+
+    status.textContent =
+      error.message ||
+      "Message publish failed.";
+
+    status.className =
+      "status error";
+
+  }
+  finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "PUBLISH MESSAGE";
+
+  }
+
+};
+
+
+
+/* =====================================================
+   GET POSTS
+===================================================== */
+
+async function getPosts(){
+
+  const q =
+    query(
+      collection(
+        db,
+        "posts"
+      ),
+      orderBy(
+        "createdAt",
+        "desc"
+      )
+    );
+
+
+  const snap =
+    await getDocs(q);
+
+
+  const posts = [];
+
+
+  snap.forEach(
+    item => {
+
+      posts.push({
+
+        id:
+          item.id,
+
+        ...item.data()
+
+      });
+
+    }
+  );
+
+
+  return posts;
+
+}
+
+
+
+/* =====================================================
+   LOAD USER
+===================================================== */
+
+async function loadUser(){
+
+  const latest =
+    document.getElementById(
+      "latest"
+    );
+
+
+  const photos =
+    document.getElementById(
+      "photos"
+    );
+
+
+  const videos =
+    document.getElementById(
+      "videos"
+    );
+
+
+  latest.innerHTML =
+    "<div class='empty'>Loading...</div>";
+
+
+  photos.innerHTML =
+    "<div class='empty'>Loading...</div>";
+
+
+  videos.innerHTML =
+    "<div class='empty'>Loading...</div>";
+
+
+  try{
+
+    const posts =
+      await getPosts();
+
+
+    latest.innerHTML = "";
+
+    photos.innerHTML = "";
+
+    videos.innerHTML = "";
+
+
+    posts.forEach(
+      (post,index) => {
+
+        const card =
+          createMediaCard(
+            post
+          );
+
+
+        if(
+          post.type === "photo"
+        ){
+
+          photos.appendChild(
+            card
+          );
+
+        }
+
+
+        if(
+          post.type === "video"
+        ){
+
+          videos.appendChild(
+            card
+          );
+
+        }
+
+
+        if(index < 6){
+
+          latest.appendChild(
+            createMediaCard(
+              post
+            )
+          );
+
+        }
+
+      }
+    );
+
+
+    if(
+      !photos.children.length
+    ){
+
+      photos.innerHTML =
+        "<div class='empty'>No photos yet.</div>";
+
+    }
+
+
+    if(
+      !videos.children.length
+    ){
+
+      videos.innerHTML =
+        "<div class='empty'>No videos yet.</div>";
+
+    }
+
+
+    if(
+      !latest.children.length
+    ){
+
+      latest.innerHTML =
+        "<div class='empty'>No content yet.</div>";
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "LOAD POSTS ERROR:",
+      error
+    );
+
+
+    latest.innerHTML =
+      "<div class='error'>Could not load content.</div>";
+
+  }
+
+
+  await loadMessages();
+
+}
+
+
+
+/* =====================================================
+   CREATE MEDIA CARD
+===================================================== */
+
+function createMediaCard(post){
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.className =
+    "card media";
+
+
+  const title =
+    escapeHTML(
+      post.title || ""
+    );
+
+
+  if(
+    post.type === "video"
+  ){
+
+    div.innerHTML = `
+
+      <video
+        controls
+        preload="metadata"
+        playsinline
+        src="${escapeAttr(post.url)}">
+      </video>
+
+      <div class="media-body">
+
+        <h3>
+          ${title}
+        </h3>
+
+      </div>
+
+    `;
+
+  }
+  else{
+
+    div.innerHTML = `
+
+      <img
+        src="${escapeAttr(post.url)}"
+        loading="lazy"
+        alt="${escapeAttr(
+          post.title || "Photo"
+        )}">
+
+      <div class="media-body">
+
+        <h3>
+          ${title}
+        </h3>
+
+      </div>
+
+    `;
+
+  }
+
+
+  return div;
+
+}
+
+
+
+/* =====================================================
+   LOAD MESSAGES
+===================================================== */
+
+async function loadMessages(){
+
+  const box =
+    document.getElementById(
+      "messages"
+    );
+
+
+  try{
+
+    const q =
+      query(
+        collection(
+          db,
+          "messages"
+        ),
+        orderBy(
+          "createdAt",
+          "desc"
+        )
+      );
+
+
+    const snap =
+      await getDocs(q);
+
+
+    box.innerHTML = "";
+
+
+    snap.forEach(
+      item => {
+
+        const data =
+          item.data();
+
+
+        const div =
+          document.createElement(
+            "div"
+          );
+
+
+        div.className =
+          "message";
+
+
+        div.innerHTML = `
+
+          <h3>
+            ${escapeHTML(
+              data.title ||
+              "Message"
+            )}
+          </h3>
+
+          <p>
+            ${escapeHTML(
+              data.text ||
+              ""
+            )}
+          </p>
+
+        `;
+
+
+        box.appendChild(
+          div
+        );
+
+      }
+    );
+
+
+    if(
+      !box.children.length
+    ){
+
+      box.innerHTML =
+        "<div class='empty'>No messages yet.</div>";
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "LOAD MESSAGES ERROR:",
+      error
+    );
+
+
+    box.innerHTML =
+      "<div class='error'>Could not load messages.</div>";
+
+  }
+
+}
+
+
+
+/* =====================================================
+   LOAD ADMIN
+===================================================== */
+
+async function loadAdmin(){
+
+  if(!auth.currentUser){
+
+    return;
+
+  }
+
+
+  try{
+
+    const posts =
+      await getPosts();
+
+
+    let photos = 0;
+
+    let videos = 0;
+
+
+    posts.forEach(
+      post => {
+
+        if(
+          post.type === "photo"
+        ){
+
+          photos++;
+
+        }
+
+
+        if(
+          post.type === "video"
+        ){
+
+          videos++;
+
+        }
+
+      }
+    );
+
+
+    document
+      .getElementById("photoCount")
+      .textContent =
+      photos;
+
+
+    document
+      .getElementById("videoCount")
+      .textContent =
+      videos;
+
+
+    const messages =
+      await getDocs(
+        collection(
+          db,
+          "messages"
+        )
+      );
+
+
+    document
+      .getElementById("messageCount")
+      .textContent =
+      messages.size;
+
+
+    await loadManage();
+
+  }
+  catch(error){
+
+    console.error(
+      "ADMIN LOAD ERROR:",
+      error
+    );
+
+  }
+
+}
+
+
+
+/* =====================================================
+   MANAGE POSTS
+===================================================== */
+
+async function loadManage(){
+
+  const box =
+    document.getElementById(
+      "manageList"
+    );
+
+
+  box.innerHTML =
+    "<div class='empty'>Loading...</div>";
+
+
+  try{
+
+    const posts =
+      await getPosts();
+
+
+    box.innerHTML = "";
+
+
+    posts.forEach(
+      post => {
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        item.className =
+          "admin-item";
+
+
+        item.innerHTML = `
+
+          <div>
+
+            <strong>
+              ${escapeHTML(
+                post.title ||
+                "Untitled"
+              )}
+            </strong>
+
+            <div class="small">
+
+              ${escapeHTML(
+                post.type ||
+                ""
+              )}
+
+            </div>
+
+          </div>
+
+          <button
+            class="danger">
+            DELETE
+          </button>
+
+        `;
+
+
+        item
+          .querySelector("button")
+          .onclick = () => {
+
+            deletePost(
+              post.id
+            );
+
+          };
+
+
+        box.appendChild(
+          item
+        );
+
+      }
+    );
+
+
+    if(
+      !box.children.length
+    ){
+
+      box.innerHTML =
+        "<div class='empty'>No posts yet.</div>";
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "MANAGE ERROR:",
+      error
+    );
+
+
+    box.innerHTML =
+      "<div class='error'>Could not load posts.</div>";
+
+  }
+
+}
+
+
+
+/* =====================================================
+   DELETE POST
+===================================================== */
+
+async function deletePost(id){
+
+  if(!auth.currentUser){
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "Delete this post?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    await deleteDoc(
+      doc(
+        db,
+        "posts",
+        id
+      )
+    );
+
+
+    await loadUser();
+
+    await loadAdmin();
+
+
+  }
+  catch(error){
+
+    console.error(
+      "DELETE ERROR:",
+      error
+    );
+
+
+    alert(
+      "Delete failed: " +
+      error.message
+    );
+
+  }
+
+}
+
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+  return String(
+    value ?? ""
+  )
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
+
+}
+
+
+
+/* =====================================================
+   ESCAPE ATTRIBUTE
+===================================================== */
+
+function escapeAttr(value){
+
+  return String(
+    value ?? ""
+  )
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+  .replaceAll(
+    ">",
+    "&gt;"
+  );
+
+}
+
+
+
+/* =====================================================
+   START APP
+===================================================== */
+
+loadUser();
+
+
+</script>
+
+</body>
+</html>
